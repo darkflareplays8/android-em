@@ -12,6 +12,10 @@ DISPLAY=:0 emulator -avd avd -no-window -no-audio \
     -gpu swiftshader_indirect -no-boot-anim \
     -memory 4096 -cores 2 -no-snapshot -no-accel -no-metrics &
 
+echo "==> Waiting for emulator to boot..."
+$ANDROID_HOME/platform-tools/adb wait-for-device
+echo "==> Emulator ready!"
+
 echo "==> Starting Node server..."
 cd /workspaces/android-em
-npm start
+PATH=$PATH ANDROID_HOME=$ANDROID_HOME npm start
